@@ -1,6 +1,12 @@
 provider "local" {
   # Configuration options
+}
 
+/*
+새로운 provider를 정의했다면 terraform init을 해줘야함.
+*/
+provider "aws" {
+  region = "ap-northeast-2"
 }
 
 # 관리할 인프라 리소스
@@ -13,6 +19,7 @@ provider "local" {
 3. terraform apply
 - 아래 파일(foo.txt)가 생성됨
 - terraform.tfstate : 상태파일
+4. terraform destory
 
 */
 resource "local_file" "foo" {
@@ -45,5 +52,32 @@ file_bar = {
 }
 */
 output "file_bar" {
-  value = data.local_file.bar
+  value = data.local_file.bar // data를 출력하면 data prefix를 붙임
+}
+
+/*
+apply를 하면 aws vpc가 새로 생성되게 된다
+*/
+resource "aws_vpc" "foo" {
+  cidr_block = "10.123.0.0/16" # 이걸 변경하는 경우 change로 인식하지 않음. 그렇기 때문에 이런 부분을 잘 파악해서 apply를 해야 함
+
+  tags = {
+    "Name" = "This is test vpc"
+  }
+}
+
+/*
+리소스에 대한 정보를 출력해서 알 수 있다
+*/
+output "vpc_foo" {
+  value = aws_vpc.foo // resource를 출력하면 prefix 없음 그냥 이름만
+}
+
+
+data "aws_vpcs" "this" {
+
+}
+
+output "vpcs" {
+  value= data.aws_vpcs.this
 }

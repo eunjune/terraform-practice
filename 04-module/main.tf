@@ -2,12 +2,18 @@ provider "aws" {
   region = "ap-northeast-2"
 }
 
+# 값을 정의하지 않으면 terraform apply 할 때 변수 주입하라고 나옴
+variable "vpc_name" {
+  description = "생성되는 VPC 이름"
+  type = string
+  default = "default"
+}
 
 module "vpc" {
   source  = "tedilabs/network/aws//modules/vpc"
   version = "0.24.0"
 
-  name                  = "fastcampus"
+  name                  = var.vpc_name
   cidr_block            = "10.0.0.0/16"
 
   internet_gateway_enabled = true

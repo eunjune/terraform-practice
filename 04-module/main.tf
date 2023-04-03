@@ -1,3 +1,11 @@
+
+/*
+tf workplace -> function
+variable -> argument
+local -> local variable
+output -> return value
+*/
+
 provider "aws" {
   region = "ap-northeast-2"
 }

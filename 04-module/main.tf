@@ -9,6 +9,13 @@ variable "vpc_name" {
   default = "default"
 }
 
+locals {
+  common_tags = {
+    Project = "Network"
+    Owner = "jej"
+  }
+}
+
 module "vpc" {
   source  = "tedilabs/network/aws//modules/vpc"
   version = "0.24.0"
@@ -21,7 +28,7 @@ module "vpc" {
   dns_hostnames_enabled = true
   dns_support_enabled   = true
 
-  tags = {}
+  tags = local.common_tags
 }
 
 module "subnet_group__public" {

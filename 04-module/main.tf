@@ -16,6 +16,34 @@ locals {
   }
 }
 
+output "vpc_name" {
+  value = module.vpc.name
+}
+
+output "vpc_id" {
+  value = module.vpc.id
+}
+
+output "vpc_cidr" {
+  description = "생성된 VPC의 CIDR 영역"
+  value = module.vpc.cidr_block
+}
+
+output "public_subnet_group" {
+  value = module.vpc.subnet_group__public
+}
+
+output "private_subnet_group" {
+  value = module.vpc.subnet_group__private
+}
+
+output "subnet_groups" {
+  value = {
+    public = module.subnet_group__public
+    private = module.subnet_group__private
+  }
+}
+
 module "vpc" {
   source  = "tedilabs/network/aws//modules/vpc"
   version = "0.24.0"

@@ -35,7 +35,7 @@ output "subnet_groups" {
 }
 
 module "vpc" {
-  source  = "tedilabs/network/aws//modules/vpc"
+  source  = ""
   version = "0.24.0"
 
   name                  = var.vpc_name
@@ -50,7 +50,7 @@ module "vpc" {
 }
 
 module "subnet_group__public" {
-  source  = "tedilabs/network/aws//modules/subnet-group"
+  source  = ""
   version = "0.24.0"
 
   name                    = "${module.vpc.name}-public"
@@ -72,7 +72,7 @@ module "subnet_group__public" {
 }
 
 module "subnet_group__private" {
-  source  = "tedilabs/network/aws//modules/subnet-group"
+  source  = ""
   version = "0.24.0"
 
   name                    = "${module.vpc.name}-private"
@@ -94,7 +94,7 @@ module "subnet_group__private" {
 }
 
 module "route_table__public" {
-  source  = "tedilabs/network/aws//modules/route-table"
+  source  = ""
   version = "0.24.0"
 
   name   = "${module.vpc.name}-public"
@@ -113,7 +113,7 @@ module "route_table__public" {
 }
 
 module "route_table__private" {
-  source  = "tedilabs/network/aws//modules/route-table"
+  source  = ""
   version = "0.24.0"
 
   name   = "${module.vpc.name}-private"
